@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dillagi | Connect with People</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #12121A;
+      color: #F8FAFC;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 16px;
+      background: #1E1E2A;
+      border-bottom: 1px solid #353544;
+    }
+
+    .logo {
+      color: #FF3D81;
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    nav a {
+      color: #F8FAFC;
+      text-decoration: none;
+    }
+
+    main {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #FF3D81;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 8px;
+      background: #FF3D81;
+      color: white;
+      font-weight: bold;
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      color: #A1A1AA;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">dillagi</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#login">Login</a>
+      <a href="#signup">Sign Up</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <h1>Welcome to Dillagi</h1>
+    <p>A place to connect, communicate and build meaningful friendships.</p>
+    <p>Our journey is just beginning.</p>
+    <button onclick="alert('Dillagi registration will be added next.')">
+      Get Started
+    </button>
+  </main>
+
+  <footer>
+    dillagi · © <span id="year"></span> All Rights Reserved.
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+</body>
+</html>
