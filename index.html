@@ -141,7 +141,7 @@
     <section class="intro">
       <h1>Welcome to Dillagi</h1>
       <p>Connect, communicate and build meaningful friendships.</p>
-      <p class="muted">A place to meet people and share your interests.</p>
+      <p class="muted">Dil se... Dil tak</p>
     </section>
 
     <section class="card" id="authCard">
@@ -308,7 +308,7 @@
           }
 
           if (!displayName) {
-            throw new Error("Please enter your display name.");
+            throw new Error("Please enter your name.");
           }
 
           result = await supabase.auth.signUp({
@@ -329,7 +329,7 @@
             showMessage("Account created successfully.");
           } else {
             showMessage(
-              "Account created. Check your email for the confirmation link before logging in."
+              "Account created. Check your email for the confirmation link before logging in, Good Luck!"
             );
           }
         } else {
