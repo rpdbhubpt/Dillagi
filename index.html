@@ -3,100 +3,382 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12121a">
   <title>Dillagi | Connect with People</title>
+
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #12121A;
-      color: #F8FAFC;
+      background: #12121a;
+      color: #f8fafc;
     }
 
     header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      padding: 16px;
-      background: #1E1E2A;
+      padding: 15px 22px;
+      background: #1e1e2a;
       border-bottom: 1px solid #353544;
     }
 
     .logo {
-      color: #FF3D81;
-      font-size: 25px;
+      color: #ff3d81;
+      font-size: 26px;
       font-weight: bold;
     }
 
     nav {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
-    nav a {
-      color: #F8FAFC;
-      text-decoration: none;
-    }
-
-    main {
-      max-width: 700px;
-      margin: 60px auto;
-      padding: 20px;
-      text-align: center;
-    }
-
-    h1 {
-      color: #FF3D81;
+    nav button {
+      background: transparent;
+      color: #f8fafc;
+      padding: 8px 4px;
     }
 
     button {
-      padding: 12px 20px;
       border: 0;
       border-radius: 8px;
-      background: #FF3D81;
+      padding: 11px 15px;
+      background: #ff3d81;
       color: white;
       font-weight: bold;
+      cursor: pointer;
     }
 
-    footer {
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    main {
+      max-width: 760px;
+      margin: 55px auto;
       padding: 20px;
+    }
+
+    .intro { text-align: center; }
+
+    h1, h2 { color: #ff3d81; }
+
+    .card {
+      max-width: 430px;
+      margin: 25px auto;
+      padding: 22px;
+      background: #1e1e2a;
+      border: 1px solid #353544;
+      border-radius: 12px;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      margin: 12px 0;
+      padding: 13px;
+      border: 1px solid #454556;
+      border-radius: 7px;
+      background: #12121a;
+      color: white;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .secondary { background: #39394b; }
+
+    #message {
+      min-height: 24px;
+      margin-top: 16px;
+      overflow-wrap: anywhere;
+      line-height: 1.5;
+    }
+
+    .muted { color: #a1a1aa; }
+
+    footer {
+      padding: 25px;
       text-align: center;
-      color: #A1A1AA;
+      color: #a1a1aa;
+    }
+
+    [hidden] { display: none !important; }
+
+    @media (max-width: 480px) {
+      header { padding: 14px; }
+      nav { gap: 10px; }
+      main { margin: 25px auto; padding: 14px; }
+      .card { padding: 17px; }
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="logo">dillagi</div>
     <nav>
-      <a href="#home">Home</a>
-      <a href="#login">Login</a>
-      <a href="#signup">Sign Up</a>
+      <button id="homeButton">Home</button>
+      <button id="loginNav">Login</button>
+      <button id="signupNav">Sign Up</button>
+      <button id="logoutButton" hidden>Logout</button>
     </nav>
   </header>
 
-  <main id="home">
-    <h1>Welcome to Dillagi</h1>
-    <p>A place to connect, communicate and build meaningful friendships.</p>
-    <p>Our journey is just beginning.</p>
-    <button onclick="alert('Dillagi registration will be added next.')">
-      Get Started
-    </button>
+  <main>
+    <section class="intro">
+      <h1>Welcome to Dillagi</h1>
+      <p>Connect, communicate and build meaningful friendships.</p>
+      <p class="muted">A place to meet people and share your interests.</p>
+    </section>
+
+    <section class="card" id="authCard">
+      <h2 id="formTitle">Create your account</h2>
+      <p id="formDescription" class="muted">
+        Sign up using your email address.
+      </p>
+
+      <form id="authForm">
+        <div id="signupFields">
+          <input id="displayName" type="text"
+            placeholder="Display name" maxlength="60"
+            autocomplete="name">
+
+          <input id="username" type="text"
+            placeholder="Username (3–20 characters)"
+            minlength="3" maxlength="20"
+            pattern="[A-Za-z0-9][A-Za-z0-9_]{2,19}"
+            autocomplete="username">
+        </div>
+
+        <input id="email" type="email"
+          placeholder="Email address" required
+          autocomplete="email">
+
+        <input id="password" type="password"
+          placeholder="Password (minimum 8 characters)"
+          minlength="8" required
+          autocomplete="new-password">
+
+        <div class="actions">
+          <button id="submitButton" type="submit">Create account</button>
+          <button id="switchButton" class="secondary" type="button">
+            I already have an account
+          </button>
+        </div>
+      </form>
+
+      <p id="message" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="card" id="accountCard" hidden>
+      <h2>Your account</h2>
+      <p id="accountInfo"></p>
+      <p class="muted">
+        Your account is connected. Profile editing and the home feed
+        will be added in the next development step.
+      </p>
+    </section>
   </main>
 
   <footer>
     dillagi · © <span id="year"></span> All Rights Reserved.
   </footer>
 
-  <script>
-    document.getElementById("year").textContent =
-      new Date().getFullYear();
+  <script type="module">
+    import { createClient } from
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+    const SUPABASE_URL = "YOUR_SUPABASE_URL";
+    const SUPABASE_KEY = "YOUR_SUPABASE_ANON_KEY";
+
+    const configured =
+      SUPABASE_URL.startsWith("https://") &&
+      !SUPABASE_URL.includes("YOUR_") &&
+      !SUPABASE_KEY.includes("YOUR_") &&
+      SUPABASE_KEY.length > 20;
+
+    const supabase = configured
+      ? createClient(SUPABASE_URL, SUPABASE_KEY)
+      : null;
+
+    const $ = id => document.getElementById(id);
+    let mode = "signup";
+
+    $("year").textContent = new Date().getFullYear();
+
+    function showMessage(text) {
+      $("message").textContent = text;
+    }
+
+    function setMode(nextMode) {
+      mode = nextMode;
+      const signup = mode === "signup";
+
+      $("formTitle").textContent = signup
+        ? "Create your account" : "Welcome back";
+
+      $("formDescription").textContent = signup
+        ? "Sign up using your email address."
+        : "Log in with your registered email.";
+
+      $("signupFields").hidden = !signup;
+      $("displayName").required = signup;
+      $("username").required = signup;
+      $("password").autocomplete = signup
+        ? "new-password" : "current-password";
+
+      $("submitButton").textContent = signup
+        ? "Create account" : "Login";
+
+      $("switchButton").textContent = signup
+        ? "I already have an account" : "Create a new account";
+
+      showMessage("");
+    }
+
+    function showSignedIn(user) {
+      $("authCard").hidden = true;
+      $("accountCard").hidden = false;
+      $("logoutButton").hidden = false;
+      $("loginNav").hidden = true;
+      $("signupNav").hidden = true;
+      $("accountInfo").textContent =
+        "Logged in as " + (user.email || "registered user");
+    }
+
+    function showSignedOut() {
+      $("authCard").hidden = false;
+      $("accountCard").hidden = true;
+      $("logoutButton").hidden = true;
+      $("loginNav").hidden = false;
+      $("signupNav").hidden = false;
+    }
+
+    $("signupNav").addEventListener("click", () => setMode("signup"));
+    $("loginNav").addEventListener("click", () => setMode("login"));
+    $("switchButton").addEventListener("click", () =>
+      setMode(mode === "signup" ? "login" : "signup")
+    );
+
+    $("homeButton").addEventListener("click", () => {
+      showMessage("Welcome to Dillagi.");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    $("authForm").addEventListener("submit", async event => {
+      event.preventDefault();
+
+      if (!supabase) {
+        showMessage(
+          "Setup required: replace the Supabase URL and publishable/anon key in this file."
+        );
+        return;
+      }
+
+      const button = $("submitButton");
+      button.disabled = true;
+      showMessage("Please wait...");
+
+      try {
+        const email = $("email").value.trim();
+        const password = $("password").value;
+        let result;
+
+        if (mode === "signup") {
+          const displayName = $("displayName").value.trim();
+          const username = $("username").value.trim();
+
+          if (!/^[A-Za-z0-9][A-Za-z0-9_]{2,19}$/.test(username)) {
+            throw new Error(
+              "Username must be 3–20 characters and use only letters, numbers and underscores."
+            );
+          }
+
+          if (!displayName) {
+            throw new Error("Please enter your display name.");
+          }
+
+          result = await supabase.auth.signUp({
+            email,
+            password,
+            options: {
+              data: {
+                display_name: displayName,
+                username: username
+              }
+            }
+          });
+
+          if (result.error) throw result.error;
+
+          if (result.data.session) {
+            showSignedIn(result.data.user);
+            showMessage("Account created successfully.");
+          } else {
+            showMessage(
+              "Account created. Check your email for the confirmation link before logging in."
+            );
+          }
+        } else {
+          result = await supabase.auth.signInWithPassword({
+            email,
+            password
+          });
+
+          if (result.error) throw result.error;
+
+          showSignedIn(result.data.user);
+          showMessage("Login successful.");
+        }
+      } catch (error) {
+        showMessage(error.message || "Something went wrong. Please try again.");
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    $("logoutButton").addEventListener("click", async () => {
+      if (!supabase) return;
+
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
+        showMessage(error.message);
+        return;
+      }
+
+      showSignedOut();
+      setMode("login");
+      showMessage("You have logged out.");
+    });
+
+    if (supabase) {
+      const { data } = await supabase.auth.getSession();
+
+      if (data.session) {
+        showSignedIn(data.session.user);
+      }
+
+      supabase.auth.onAuthStateChange((_event, session) => {
+        if (session) showSignedIn(session.user);
+        else showSignedOut();
+      });
+    }
+
+    setMode("signup");
   </script>
 </body>
 </html>
